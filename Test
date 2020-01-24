@@ -1,0 +1,17 @@
+package com;
+
+import java.sql.*;
+public class Test {
+
+	public static void main(String[] args) throws Exception, SQLException{
+		// TODO Auto-generated method stub
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		System.out.println("hello");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@172.25.196.115:1521/xepdb1","orauser7","tcshyd");
+		//Connection con=TestCondition.connect();
+		Statement st=con.createStatement();
+		int n=st.executeUpdate("insert into age values(20)");
+		System.out.println("inserted"+n);
+	}
+
+}
