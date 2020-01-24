@@ -1,0 +1,18 @@
+package com;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+class TestCondition {
+	
+	public static Connection connect() throws ClassNotFoundException, SQLException
+	{
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		//System.out.println("hello");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@172.25.196.115:1521/xepdb1","orauser7","tcshyd");
+		//Connection con=TestCondition.connect();
+		return con;
+	}
+
+}
