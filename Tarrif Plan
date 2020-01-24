@@ -1,0 +1,120 @@
+package com;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+class Tariff {
+
+	public void tarrif() throws ClassNotFoundException, SQLException
+	{
+	System.out.println("Enter 1 to add plans");
+	System.out.println("Enter 2 to update plans");
+	System.out.println("Enter 3 to view plans");
+	System.out.println("Enter 4 to delete plans");
+	//System.out.println("Enter 0 to exit");
+	Scanner sc=new Scanner(System.in);
+	int ch=sc.nextInt();
+	switch(ch)
+	{
+	case 1:addPlan();
+	break;
+	case 2:updatePlan();
+	break;
+	case 3:viewPlan();
+	break;
+	case 4:deletePlan();
+	break;
+	
+	}
+	}
+
+	private void deletePlan() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		int planid;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the plan id to be deleted");
+		planid=sc.nextInt();
+		Connection con=TestCondition.connect();
+		PreparedStatement ps=con.prepareStatement("Delete from tarrif_plan where pid=?");
+		ps.setInt(1,planid);
+		int p=ps.executeUpdate();
+		System.out.println(p+"plans deleted");
+		
+	}
+
+	private void viewPlan() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		int planid;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the plan id to be viewed");
+		planid=sc.nextInt();
+		Connection con=TestCondition.connect();
+		Statement st=con.createStatement();
+		ResultSet rs=st.executeQuery("Select ");
+		 
+	      while(rs.next()){
+	         
+	    	System.out.println(rs.getInt("PID"));
+	    	System.out.println(rs.getString("PNAME"));
+	    	System.out.println(rs.getString("PTYPE"));
+	    	System.out.println(rs.getInt("TARRIF_RATE"));
+	    	System.out.println(rs.getInt("VALIDITY"));
+	    	System.out.println(rs.getString("RENTAL"));
+	      }
+	      rs.close();
+		
+	}
+
+	private void updatePlan() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addPlan() throws ClassNotFoundException, SQLException {
+		// TODO Auto-generated method stub
+		int planid;
+		String planname;
+		String plantype;
+		int tarrif_rate;
+		int validity;
+		String rental;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter plan id");
+		planid=sc.nextInt();
+		System.out.println("Enter plan name");
+		planname=sc.next();
+		System.out.println("Enter plantype");
+		plantype=sc.next();
+		System.out.println("Enter tarrif rate");
+		tarrif_rate=sc.nextInt();
+		System.out.println("Enter validity");
+		validity=sc.nextInt();
+		System.out.println("Enter rental");
+		rental=sc.next();
+		Connection con=TestCondition.connect();
+		PreparedStatement ps=con.prepareStatement("Insert into tarrif_plan values(?,?,?,?,?,?)");
+		ps.setInt(1,planid);
+		ps.setString(2,planname);
+		ps.setString(3,plantype);
+		ps.setInt(4,tarrif_rate);
+		ps.setInt(5,validity);
+		ps.setString(6,rental);
+		if (ps.execute())
+		{
+			System.out.println("Plan added successfully");
+		}
+		else 
+		{
+			System.out.println("Plan not added");
+		}
+		
+		
+		
+	}
+
+}
+  
