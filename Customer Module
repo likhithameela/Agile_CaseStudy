@@ -1,0 +1,97 @@
+package com;
+
+import java.util.*;
+import java.sql.*;
+
+class Customer {
+	public static void main(String[] args){
+		try
+		{
+		String driver="oracle.jdbc.driver.OracleDriver";
+	    String url="jdbc:oracle:thin:@172.25.196.115:1521/xepdb1";
+		String user="orauser7";
+	    String pass="tcshyd";
+	   Class.forName(driver);
+	   Connection con=DriverManager.getConnection(url,user,pass);
+	  // String q="insert into customer values(1,'Abhi','abhi@gmail.com',9876543210)";
+	   String q="select * from customer";
+	   Statement stmt=con.createStatement();
+	   ResultSet rs=stmt.executeQuery(q);
+	   while(rs.next())
+	   {
+		   int id=rs.getInt("id");
+	   String name=rs.getString("name");
+	   String email=rs.getString("email");
+	       int contact=rs.getInt("contact");
+	       System.out.println(id+"  "+name+"   "+email+"   "+contact);
+	   }
+	   con.close();
+		   
+	}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		}   
+	   
+	}
+		
+    public void customer(){ 
+    System.out.println("Enter 1 to register");
+    System.out.println("Enter 2 to view plans");
+    System.out.println("Enter 3 to cancel subscription");
+   
+    Scanner sc=new Scanner(System.in);
+    int ch=sc.nextInt();
+    switch(ch){
+    case 1: register();
+    break;
+    case 2: viewPlans();
+    break;
+    case 3: cancelSubscription();
+    break;
+    }
+    sc.close();
+  }    
+ public void register(){
+	   int id;
+	    String name;
+	    String email;
+	    String address;
+	    long contact;
+	    String password; 
+	    Scanner sc=new Scanner(System.in);
+	    System.out.println("Enter your Id");
+	    id = sc.nextInt();
+	    System.out.println("Enter your Name");
+	     name = sc.nextLine();
+	    System.out.println("Enter your Email");
+	     email = sc.nextLine();
+	    System.out.println("Enter your Address");
+	     address = sc.nextLine();
+	    System.out.println("Enter your Contact Number");
+	     contact = sc.nextLong();
+	    System.out.println("Enter your Password");
+	     password = sc.nextLine();
+	    sc.close();
+ }    
+public void viewPlans(){
+	int pid;
+	int id;
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter your id");
+	id = sc.nextInt();
+	System.out.println("Enter your pid");
+	id = sc.nextInt();
+	sc.close();
+}
+public void cancelSubscription(){
+	int pid;
+	int id;
+	Scanner sc=new Scanner(System.in);
+	System.out.println("Enter your id");
+	id = sc.nextInt();
+	System.out.println("Enter your pid");
+	id = sc.nextInt();
+	sc.close();
+   }
+}
