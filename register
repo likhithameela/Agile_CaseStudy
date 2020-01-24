@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900,900i" type="text/css" media="all">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-repeat: no-repeat;
+  background-size: cover;
+background-image: url('img.jfif');
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+<script> 
+function JavaS()								 
+{ 
+	var name = document.forms["Form"]["name"];			 
+	var email = document.forms["Form"]["email"]; 
+	var phone = document.forms["Form"]["cnt"]; 
+	
+	var address = document.forms["Form"]["address"]; 
+	if (name.value == "")                                  
+         { 
+       		window.alert("Please enter your name."); 
+       	 	name.focus(); 
+       	 	return false; 
+         } 
+	if (address.value == "")							 
+	{ 
+		window.alert("Please enter your address."); 
+		address.focus(); 
+		return false; 
+	} 
+	if (email.value == "")								 
+	{ 
+		window.alert("Please enter your email"); 
+		email.focus(); 
+		return false; 
+	}
+      else{
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(email.value.match(mailformat))
+		{
+			email.focus();
+			return true;
+		}
+		else
+		{
+			alert("You have entered an invalid email address!");
+			email.focus();
+			return false;
+		}
+
+
+          } 
+
+
+	if (phone.value == "")						 
+	{ 
+		window.alert("Please enter your telephone number."); 
+		phone.focus(); 
+		return false; 
+	} 
+	/*else{
+
+		var phoneno = /^\d{10}$/;
+               if((phone.value.match(phoneno))
+		{
+       		 	phone.focus();
+     			 return true;
+		}
+        	
+     		 else
+        	{
+       			 alert("enter valid number");
+       			 return false;
+       		 }
+	}*/
+
+	return true; 
+}</script> 
+
+</head>
+<body>
+
+<form name="Form" onsubmit="return JavaS()" method="post">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Please fill in this form to create an account.</p>
+    <hr>
+    <label for="Name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name">
+    <label for="address"><b>Address</b></label>
+    <input type="text" placeholder="Enter Address" name="address">
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email">
+    <label for="contact"><b>Contact</b></label>
+    <input type="text" placeholder="Enter mobileno" name="cnt">
+
+   
+    <hr>
+    
+
+    <input type="submit" value="Register" name="Register">
+  </div>
+  
+  <div class="container signin">
+    <p>Already have an account? <a href="#">Sign in</a>.</p>
+  </div>
+</form>
+
+</body>
+</html>
