@@ -1,0 +1,98 @@
+package com;
+
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.*;
+
+class Customer {
+	public static void main(String[] args) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			System.out.println("hello");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@172.25.196.115:1521/xepdb1", "orauser7",
+					"tcshyd");
+			// Connection con=TestCondition.connect();
+			// String q=insert into customer
+			// values(1,'Abhi','abhi@gmail.com',9876543210);
+			PreparedStatement ps = con.prepareStatement("insert into customer values(?,?,?,?,?,?)");
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+			do {
+				System.out.println("enter id:");
+				int id = Integer.parseInt(br.readLine());
+				System.out.println("enter name:");
+				String name = br.readLine();
+				System.out.println("enter email");
+				String email = br.readLine();
+				System.out.println("enter address");
+				String address = br.readLine();
+				System.out.println("enter contact");
+				int cnt = Integer.parseInt(br.readLine());
+				System.out.println("enter password");
+				String pwd = br.readLine();
+
+				ps.setInt(1, id);
+				ps.setString(2, name);
+				ps.setString(3, email);
+				ps.setString(4, address);
+				ps.setInt(5, cnt);
+				ps.setString(6, pwd);
+				int i = ps.executeUpdate();
+				System.out.println(i + " records affected");
+
+				System.out.println("Do you want to continue: y/n");
+				String s = br.readLine();
+				if (s.startsWith("n")) {
+					break;
+				}
+			} while (true);
+
+			ResultSet rs = ps.executeQuery("select id,name,email,contact from customer");
+			System.out.println("query");
+			// System.out.println(rs.next());
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				int contact = rs.getInt("contact");
+				System.out.println(id + " " + name + "" + email + "" + contact);
+				//System.out.println("loop");
+			}
+			con.close();
+			System.out.println("close");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+}
+
+/*
+ * public void customer(){ System.out.println("Enter 1 to register");
+ * System.out.println("Enter 2 to view plans");
+ * System.out.println("Enter 3 to cancel subscription");
+ * 
+ * Scanner sc=new Scanner(System.in); int ch=sc.nextInt(); switch(ch){ case 1:
+ * register(); break; case 2: viewPlans(); break; case 3: cancelSubscription();
+ * break; } sc.close(); }
+ * 
+ * public void register(){ int id; String name; String email; String address;
+ * long contact; String password; Scanner sc=new Scanner(System.in);
+ * System.out.println("Enter your Id"); id = sc.nextInt();
+ * System.out.println("Enter your Name"); name = sc.nextLine();
+ * System.out.println("Enter your Email"); email = sc.nextLine();
+ * System.out.println("Enter your Address"); address = sc.nextLine();
+ * System.out.println("Enter your Contact Number"); contact = sc.nextLong();
+ * System.out.println("Enter your Password"); password = sc.nextLine();
+ * sc.close(); }
+ * 
+ * public void viewPlans(){ int pid; int id; Scanner sc=new Scanner(System.in);
+ * System.out.println("Enter your id"); id = sc.nextInt();
+ * System.out.println("Enter your pid"); id = sc.nextInt(); sc.close(); } public
+ * void cancelSubscription(){ int pid; int id; Scanner sc=new
+ * Scanner(System.in); System.out.println("Enter your id"); id = sc.nextInt();
+ * System.out.println("Enter your pid"); id = sc.nextInt(); sc.close(); } }
+ */
